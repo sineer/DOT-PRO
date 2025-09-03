@@ -4,6 +4,7 @@ if status is-interactive
 set -gx SSH_AUTH_SOCK /Users/j/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
 set -gx COLORTERM truecolor
 set -gx EDITOR emacsclient
+set -gx PAGER nvimpager
 set -gx LANG en_US.UTF-8    # Adjust this to your language!
 set -gx LC_ALL en_US.UTF-8  # Adjust this to your locale!
 #set -gx VIRTUAL_ENV_DISABLE_PROMPT true
@@ -64,9 +65,9 @@ if type -q eza
 end
  
 # `cat` → `bat` abbreviation
-# Requires `brew install bat`
-if type -q bat
-  abbr --add -g cat 'bat'
+# Requires `brew install nvimpager'
+if type -q nvimpager
+  abbr --add -g cat 'nvimpager'
 end
 
 # `zoxide` → `z` abbreviation
