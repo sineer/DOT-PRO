@@ -2,7 +2,6 @@ if status is-interactive
 
     #set -gz ANTHROPIC_BASE_URL http://localhost:8080
 
-    set -gx SSH_AUTH_SOCK /Users/j/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock
     set -gx COLORTERM truecolor
     set -gx EDITOR emacsclient
     set -gx PAGER nvimpager
@@ -10,8 +9,7 @@ if status is-interactive
     set -gx LC_ALL en_US.UTF-8 # Adjust this to your locale!
     #set -gx VIRTUAL_ENV_DISABLE_PROMPT true
     set -gx GOPATH $HOME/go
-    set -x PATH $GOPATH/bin $HOME/.composer/vendor/bin $HOME/Library/Python/3.7/bin $PATH
-    set -gx HOMEBREW_AUTO_UPDATE_SECS 86400
+    set -x PATH $GOPATH/bin $PATH
     set -gx DOCKER_BUILDKIT 1
     set -gx COMPOSE_DOCKER_CLI_BUILD 1
     #set -g fish_key_bindings fish_vi_key_bindings
@@ -51,6 +49,7 @@ if status is-interactive
     # TMUX
     set fish_tmux_autostart true
     set fish_tmux_autostart_once false
+    set fish_tmux_detached true
     set fish_tmux_autoconnect false
     set fish_tmux_autoquit true
 
@@ -91,7 +90,5 @@ if status is-interactive
     if type -q gtar
         abbr --add -g tar gtar
     end
-
-    nvm use latest
 
 end
