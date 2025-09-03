@@ -1,0 +1,9 @@
+package bass
+package brew
+package colored-man-pages
+package export
+package https://github.com/jhillyerd/plugin-git
+package osx
+package wifi-password
+theme bobthefish
+theme default
