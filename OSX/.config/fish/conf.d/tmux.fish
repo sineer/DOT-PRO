@@ -76,7 +76,7 @@ function _fish_tmux_plugin_run
         exit 1
     end
 
-    set -q fish_tmux_autoquit || set fish_tmux_autoquit $fish_tmux_autostart
+    set -q fish_tmux_autoquit || set -g fish_tmux_autoquit $fish_tmux_autostart
     # Don't override autoconnect if it's already set in config
     if not set -q fish_tmux_autoconnect
         set fish_tmux_autoconnect true
@@ -207,13 +207,25 @@ function _fish_tmux_plugin_run_autostart --on-variable fish_tmux_autostart --on-
             return
         else if test "$fish_tmux_autostart_once" = false
             # Always start new session when autostart_once is false
-            _fish_tmux_plugin_run
+            if test "$fish_tmux_autoquit" = true
+                # Use exec to replace fish with tmux when autoquit is true
+                exec tmux
+            else
+                # Run tmux normally and return to fish prompt when autoquit is false
+                _fish_tmux_plugin_run
+            end
         else if test ! "$fish_tmux_autostarted" = true
             # Start tmux for the first time only
             mkdir -p "$HOME/.cache"
             touch "$HOME/.cache/fish_tmux_autostarted"
             set -gx fish_tmux_autostarted true
-            _fish_tmux_plugin_run
+            if test "$fish_tmux_autoquit" = true
+                # Use exec to replace fish with tmux when autoquit is true
+                exec tmux
+            else
+                # Run tmux normally and return to fish prompt when autoquit is false
+                _fish_tmux_plugin_run
+            end
         end
     end
 end

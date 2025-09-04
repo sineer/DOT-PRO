@@ -1,17 +1,19 @@
 if status is-interactive
 
     #set -gz ANTHROPIC_BASE_URL http://localhost:8080
+    #set -gx PAGER nvimpager
+    #set -gx VIRTUAL_ENV_DISABLE_PROMPT true
 
     set -gx COLORTERM truecolor
-    set -gx EDITOR emacsclient
-    set -gx PAGER nvimpager
-    set -gx LANG en_US.UTF-8 # Adjust this to your language!
-    set -gx LC_ALL en_US.UTF-8 # Adjust this to your locale!
-    #set -gx VIRTUAL_ENV_DISABLE_PROMPT true
+    set -gx EDITOR zed
+    set -gx LANG en_US.UTF-8
+    set -gx LC_ALL en_US.UTF-8
+
     set -gx GOPATH $HOME/go
-    set -x PATH $GOPATH/bin $PATH
+    set -x PATH $GOPATH/bin $HOME/.local/bin $HOME/.node_modules/bin $PATH
     set -gx DOCKER_BUILDKIT 1
     set -gx COMPOSE_DOCKER_CLI_BUILD 1
+
     #set -g fish_key_bindings fish_vi_key_bindings
     #set -g fish_bind_mode insert
     fish_default_key_bindings
@@ -46,12 +48,11 @@ if status is-interactive
 
     bind -M insert \cg forget
 
-    # TMUX
-    set fish_tmux_autostart true
-    set fish_tmux_autostart_once false
-    set fish_tmux_detached true
-    set fish_tmux_autoconnect false
-    set fish_tmux_autoquit true
+    # TMUX - set these BEFORE they might be used
+    set -gx fish_tmux_autoconnect false
+    set -gx fish_tmux_autostart_once false
+    set -gx fish_tmux_autostart true
+    set -gx fish_tmux_autoquit false
 
     # `ls` → `ls -laG` abbreviation
     abbr -a -g ls ls -laG
@@ -80,9 +81,14 @@ if status is-interactive
         abbr --add -g vi nvim
     end
 
-    # `e` → `emacsclient` abbreviation
-    if type -q emacsclient
-        abbr --add -g e emacsclient
+    # `c` → `cursor` abbreviation
+    if type -q cursor
+        abbr --add -g e cursor
+    end
+
+    # `e` → `zed` abbreviation
+    if type -q zed
+        abbr --add -g e zed
     end
 
     # `tar` → `gtar` abbreviation
@@ -91,4 +97,9 @@ if status is-interactive
         abbr --add -g tar gtar
     end
 
+    if type -q claude
+        abbr --add -g cc claude --dangerously-skip-permissions
+    end
+
+    abbr --add -g dc docker compose
 end
