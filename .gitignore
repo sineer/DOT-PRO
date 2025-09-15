@@ -1,1 +1,4 @@
 .DS_Store
+
+SHARED/.config/fish/.fish_vars
+SHARED/.config/nvim/lazy-lock.json

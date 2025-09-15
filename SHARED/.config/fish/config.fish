@@ -101,5 +101,9 @@ if status is-interactive
         abbr --add -g cc claude --dangerously-skip-permissions
     end
 
+    if type -q lazygit
+        abbr --add -g lg lazygit
+    end
+
     abbr --add -g dc docker compose
 end

@@ -8,3 +8,5 @@ set -gx SSH_AUTH_SOCK /Users/j/Library/Containers/com.bitwarden.desktop/Data/.bi
 set -gx fish_tmux_autoquit false
 
 source ~/.PRO/SHARED/.config/fish/config.fish
+
+nvm use latest
