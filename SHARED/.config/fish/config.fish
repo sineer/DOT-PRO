@@ -10,7 +10,7 @@ if status is-interactive
     set -gx LC_ALL en_US.UTF-8
 
     set -gx GOPATH $HOME/go
-    set -x PATH $GOPATH/bin $HOME/.local/bin $HOME/.node_modules/bin $PATH
+    set -x PATH $GOPATH/bin $HOME/bin $HOME/.local/bin $HOME/.node_modules/bin $PATH
     set -gx DOCKER_BUILDKIT 1
     set -gx COMPOSE_DOCKER_CLI_BUILD 1
 
