@@ -9,4 +9,8 @@ set -gx fish_tmux_autoquit false
 
 source ~/.PRO/SHARED/.config/fish/config.fish
 
-nvm use latest
+if status is-interactive
+    nvm use latest
+end
+
+#nvm use latest
