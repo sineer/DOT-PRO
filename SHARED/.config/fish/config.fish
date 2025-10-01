@@ -1,6 +1,5 @@
 if status is-interactive
 
-    #set -gz ANTHROPIC_BASE_URL http://localhost:8080
     #set -gx PAGER nvimpager
     #set -gx VIRTUAL_ENV_DISABLE_PROMPT true
 
@@ -10,7 +9,11 @@ if status is-interactive
     set -gx LC_ALL en_US.UTF-8
 
     set -gx GOPATH $HOME/go
-    set -x PATH $GOPATH/bin $HOME/bin $HOME/.local/bin $HOME/.node_modules/bin $PATH
+    fish_add_path $GOPATH/bin
+    fish_add_path $HOME/bin
+    fish_add_path $HOME/.local/bin
+    fish_add_path $HOME/.mobules/bin
+
     set -gx DOCKER_BUILDKIT 1
     set -gx COMPOSE_DOCKER_CLI_BUILD 1
 
