@@ -467,7 +467,10 @@ def main():
     )
 
     log_level = logging._nameToLevel.get(options.log_level, logging.WARNING)
-    log_file = os.path.join(tempfile.gettempdir(), 'tmux-window-name')
+    # Get current username using Python's getpass module (most reliable method)
+    import getpass
+    username = getpass.getuser()
+    log_file = os.path.join(tempfile.gettempdir(), f'tmux-window-name-{username}')
     logging.basicConfig(
         level=log_level, filename=log_file, format='%(levelname)s - %(filename)s:%(lineno)d %(funcName)s() %(message)s'
     )
