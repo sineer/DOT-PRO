@@ -4,7 +4,13 @@ if status is-interactive
     #set -gx VIRTUAL_ENV_DISABLE_PROMPT true
 
     set -gx COLORTERM truecolor
-    set -gx EDITOR zed
+    if type -q zed
+        set -gx EDITOR zed
+    else if type -q nvim
+        set -gx EDITOR nvim
+    else
+        set -gx EDITOR vi
+    end
     set -gx LANG en_US.UTF-8
     set -gx LC_ALL en_US.UTF-8
 
@@ -57,45 +63,40 @@ if status is-interactive
     set -gx fish_tmux_autostart true
     set -gx fish_tmux_autoquit false
 
-    # `ls` → `ls -laG` abbreviation
-    abbr -a -g ls ls -laG
-
-    # `ls` → `eza` abbreviation
-    # Requires `brew install exa`
+    # `ls` — eza preferred; else BSD vs GNU defaults
     if type -q eza
         abbr --add -g ls 'eza --long --classify --all --git --tree --level 1'
+    else if test (uname) = Darwin
+        abbr -a -g ls ls -laG
+    else
+        abbr -a -g ls ls -la --color=auto
     end
 
-    # `cat` → `bat` abbreviation
-    # Requires `brew install nvimpager'
-    if type -q nvimpager
+    # `cat` → `bat` or nvimpager
+    if type -q bat
+        abbr --add -g cat bat
+    else if type -q nvimpager
         abbr --add -g cat nvimpager
     end
 
-    # `zoxide` → `z` abbreviation
-    # Requires `brew install zoxide
-    if type -q bat
+    # `zoxide` → `z`
+    if type -q zoxide
         abbr --add -g z zoxide
     end
 
-    # `vi` → `nvim` abbreviation
-    # Requires `brew install neovim
+    # `vi` → `nvim`
     if type -q nvim
         abbr --add -g vi nvim
     end
 
-    # `c` → `cursor` abbreviation
     if type -q cursor
         abbr --add -g e cursor
     end
 
-    # `e` → `zed` abbreviation
     if type -q zed
         abbr --add -g e zed
     end
 
-    # `tar` → `gtar` abbreviation
-    # Requires `brew install gtar
     if type -q gtar
         abbr --add -g tar gtar
     end

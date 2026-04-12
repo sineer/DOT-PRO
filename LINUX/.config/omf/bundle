@@ -1,0 +1,6 @@
+package bass
+package colored-man-pages
+package export
+package https://github.com/jhillyerd/plugin-git
+theme bobthefish
+theme default
